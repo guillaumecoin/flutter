@@ -2,6 +2,7 @@ import 'package:agence/services/habitation_service.dart';
 import 'package:agence/share/location_style.dart';
 import 'package:agence/share/location_text_style.dart';
 import 'package:agence/views/habitat_list.dart';
+import 'package:agence/views/habitation_details.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Locastions',
+      title: 'Locations',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -157,6 +158,13 @@ class MyHomePage extends StatelessWidget {
     return Container(
       width: 240,
       margin: EdgeInsets.all(4.0),
+    child: GestureDetector(
+    onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => HabitationDetails(habitation)),
+    );
+    },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -186,6 +194,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }

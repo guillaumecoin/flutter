@@ -1,7 +1,10 @@
 import 'package:agence/models/habitation.dart';
 import 'package:agence/models/typeHabitat.dart';
 import 'package:agence/services/habitation_service.dart';
+import 'package:agence/share/location_style.dart';
+import 'package:agence/views/habitation_details.dart';
 import 'package:agence/views/share/HabitationOption.dart';
+import 'package:agence/views/share/habitation_features_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -37,6 +40,13 @@ class HabitationList extends StatelessWidget {
   _buildRow(Habitation habitation, BuildContext context) {
     return Container(
       margin: EdgeInsets.all(4.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HabitationDetails(habitation)),
+          );
+        },
       child: Column(
         children: [
           Container(
@@ -53,6 +63,7 @@ class HabitationList extends StatelessWidget {
           _buildDetails(habitation),
         ],
       ),
+    )
     );
   }
 
@@ -73,11 +84,11 @@ class HabitationList extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Text(format.format(habitation.prixmois),
-                style: TextStyle(
+                style: LocationStyle.boldTextStyle /*TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto',
                   fontSize: 22,
-                  ),),
+                  ),*/),
 
               ),
               ],
@@ -85,8 +96,9 @@ class HabitationList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  HabitationOption(Icons.group, "${habitation.chambres} personnes"),
-                  HabitationOption(Icons.fit_screen, "${habitation.superficie} m²"),
+                  // HabitationOption(Icons.group, "${habitation.chambres} personnes"),
+                  //HabitationOption(Icons.fit_screen, "${habitation.superficie} m²"),
+                  HabitationFeaturesWidget(habitation)
                 ],
               ),
             ],
